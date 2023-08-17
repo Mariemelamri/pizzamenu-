@@ -1,39 +1,38 @@
-import React, { useState } from 'react';
-import logo from '../assets/pizzaLogo.png';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import logo from '../assets/pizzaLogo.png';
 import '../styles/Navbar.css';
-import ReorderIcon from '@mui/icons-material/Reorder';
 
-function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+function Navbar({cartItems }) {
+  const totalItemsInCart = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <div className="navbar">
-       <div className="leftSide" id={menuOpen ? "open" : "close"}>
+      <div className="leftSide">
         <img src={logo} alt="Logo" />
-        <div className="hiddenLinks">
-            <Link to="/"> Home</Link>
-            <Link to="/menu"> Menu</Link>
-            <Link to="/about"> About</Link>
-            <Link to="/contact"> Contact </Link>
-            <Link to="/panier"> Panier </Link>
-          </div>
       </div>
-      <div className="rightSide" >
-            <Link to="/"> Home</Link>
-            <Link to="/menu"> Menu</Link>
-            <Link to="/about"> About</Link>
-            <Link to="/contact"> Contact </Link>
-            <Link to="/panier"> Panier </ Link>
-            <button onClick={toggleMenu}>
-              <ReorderIcon />
-            </button>
-        </div>
+      <div className="rightSide">
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/menu">Menu</Link>
+          </li>
         
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
+          <li>
+            <Link to="/cart" className="cart">
+              <FontAwesomeIcon icon={faShoppingCart} />
+              <span className="cartItemCount">{totalItemsInCart}</span>
+            </Link>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }

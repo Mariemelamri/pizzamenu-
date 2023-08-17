@@ -1,13 +1,15 @@
+import React from 'react';
+import '../styles/Menu.css';
 
-import React from "react";
-
-function MenuItem({ image, name, price }) {
-
+function MenuItem({ id, image, name, price, handleAddProduct }) {
   return (
     <div className="menuItem">
-      <div style={{ backgroundImage: `url(${image})` }}> </div>
-      <h1> {name} </h1>
-      <p> ${price} </p>
+      <div className="menuItemImage" style={{ backgroundImage: `url(${image})` }}></div>
+      <h1>{name}</h1>
+      <p>{price} dt</p>
+      <button className="product-add-button" onClick={() => handleAddProduct({ id, image, name, price })}>
+        Add to Cart
+      </button>
     </div>
   );
 }

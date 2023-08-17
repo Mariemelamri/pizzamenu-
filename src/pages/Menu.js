@@ -1,42 +1,29 @@
-import React from "react";
+import React from 'react';
+import productItems from '../data/data';
+import MenuItem from '../components/MenuItem';
+import '../styles/Menu.css';
 
-import { MenuList } from "../helpers/MenuList";
-import MenuItem from "../components/MenuItem";
-import "../styles/Menu.css";
-import { Navigate } from "react-router-dom";
-
-function Menu({ addToPanier }) {
-  const handlenextpage =() => {
-    Navigate("/src/pages/Panier.js", {
-      state:{
-        menuItem : MenuItem 
-      }
-    });
-  }
- 
-    return (
-      <div className="menu">
-        <h1 className="menuTitle">Our Menu</h1>
-        <div className="menuList">
-        {MenuList.map((menuItem, key) => {
-          return (
-            <div key={key} className="menuItem">
-              <MenuItem
-                image={menuItem.image}
-                name={menuItem.name}
-                price={menuItem.price}
-              />
-            <button onClick={handlenextpage}>
-  Ajouter au panier
-</button>
-
-
-            </div>
-            );
-          })}
-        </div>
+function Menu({ handleAddProduct }) {
+  return (
+    <div className="menu">
+      <h1 className="menuTitle">Our Menu</h1>
+      <div className="menuList">
+        {productItems.map((menuItem, index) => (
+          <div key={index} className="menuItem">
+          
+            <MenuItem
+              id={menuItem.id}
+              image={menuItem.image}
+              name={menuItem.name}
+              price={menuItem.price}
+              handleAddProduct={handleAddProduct}
+            />
+           
+          </div>
+        ))}
       </div>
-    );
-  }
-  
-  export default Menu;
+    </div>
+  );
+}
+
+export default Menu;
